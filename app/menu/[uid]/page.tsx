@@ -103,8 +103,15 @@ export default function MenuPage() {
         const colRef = collection(db, "RestaurantMenu", uid, defaultCountry);
         const snap = await getDocs(colRef);
 
-        const docs = snap.docs.map(doc => {
-          const data = doc.data();
+        const docs = snap.docs.map((doc) => {
+          const data = doc.data() as {
+            name: string;
+            price: number;
+            photo: string;
+            category?: string;
+            dateOfCreation?: any;
+          };
+
           return {
             ...data,
             dateOfCreation: data.dateOfCreation?.toDate?.() ?? new Date(0),
@@ -118,7 +125,7 @@ export default function MenuPage() {
           return acc;
         }, {});
 
-        Object.keys(grouped).forEach(category => {
+        Object.keys(grouped).forEach((category) => {
           grouped[category].sort(
             (a, b) => b.dateOfCreation - a.dateOfCreation
           );
