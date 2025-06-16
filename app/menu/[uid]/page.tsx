@@ -7,7 +7,9 @@ import { db } from "../../../firebase";
 import styles from "./menu.module.css";
 
 export default function MenuPage() {
-  const { uid } = useParams();
+  const params = useParams();
+  const uid = Array.isArray(params.uid) ? params.uid[0] : params.uid;
+
   const [groupedItems, setGroupedItems] = useState<Record<string, any[]>>({});
   const [country, setCountry] = useState<string | null>(null);
 
