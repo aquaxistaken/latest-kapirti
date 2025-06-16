@@ -109,12 +109,12 @@ export default function MenuPage() {
           };
         });
 
-        const grouped = docs.reduce((acc, item) => {
+        const grouped = docs.reduce((acc: Record<string, any[]>, item) => {
           const category = item.category || "Other";
           if (!acc[category]) acc[category] = [];
           acc[category].push(item);
           return acc;
-        }, {} as Record<string, any[]>);
+        }, {});
 
         Object.keys(grouped).forEach(category => {
           grouped[category].sort(
@@ -195,4 +195,3 @@ export default function MenuPage() {
     </div>
   );
 }
-  
